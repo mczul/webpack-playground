@@ -1,20 +1,31 @@
 const path = require('path');
 
-const {CleanWebpackPlugin} = require("clean-webpack-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
     entry: {
-        main: './src/index.js',
-        vendor: './src/vendor.js',
+        main: './src/index.ts',
+        vendor: './src/vendor.ts',
     },
     output: {
-        filename: '[name].[contentHash].js',
-        path: path.resolve(__dirname, 'dist')
+        filename: '[name].[contenthash].js',
+        clean: true,
+        path: path.resolve(__dirname, 'dist'),
+        assetModuleFilename: 'images/[contenthash][ext][query]'
     },
+    devtool: 'inline-source-map',
     module: {
         rules: [
+            // TypeScript
+            {
+                test: /\.ts$/i,
+                use: [
+                    { loader: 'ts-loader' }
+                ],
+                exclude: /node_modules/i
+            },
             // SCSS / CSS
             {
                 test: /\.scss$/i,
@@ -29,33 +40,20 @@ module.exports = {
             },
             // Images
             {
-                test: /\.jpe?g$/i,
-                use: [
-                    {
-                        loader: 'file-loader',
-                        options: {
-                            name: '[name].[contentHash].[ext]',
-                            outputPath: 'images',
-                        }
-                    }
-                ]
-            },
-            // Texts
-            {
-                test: /\.txt$/i,
-                use: [
-                    {loader: 'raw-loader', options: {}}
-                ]
+                test: /\.(jpe?g|png)$/i,
+                type: 'asset/resource'
             }
         ]
     },
+    resolve: {
+        extensions: ['.ts', '.js']
+    },
     plugins: [
-        new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
             template: './src/template.html'
         }),
         new MiniCssExtractPlugin({
-            filename: '[name].[contentHash].css'
+            filename: '[name].[contenthash].css'
         }),
     ]
 }

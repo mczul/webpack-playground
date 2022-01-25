@@ -1,5 +1,14 @@
 @import "variables";
 
+@keyframes pulse_image {
+    0% {
+        background-size: 70%;
+    }
+    100% {
+        background-size: 130%;
+    }
+}
+
 #container {
     display: flex;
     flex-direction: column;
@@ -17,10 +26,8 @@
 
     background-image: url("./images/hammer.jpg");
     background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-
-    /*background-image: linear-gradient(to bottom, lightblue, limegreen);*/
+    background-position: top;
+    animation: pulse_image 2s infinite alternate;
 
     opacity: 0.5;
 
@@ -40,6 +47,7 @@
 
 footer {
     text-align: center;
+
     animation-name: blink;
     animation-duration: 750ms;
     animation-direction: alternate-reverse;

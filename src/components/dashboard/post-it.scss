@@ -1,0 +1,12 @@
+@use '../../variables.scss' as vars;
+
+.post-it-wrapper {
+  display: block;
+
+  min-width: 32ch;
+  min-height: 5rem;
+
+  border-style: solid;
+  border-width: 0.5rem;
+  border-color: vars.$primary-color;
+}
