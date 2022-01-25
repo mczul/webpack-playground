@@ -1,8 +1,6 @@
-import './teaser.scss';
+import './teaser-card.scss';
 
-import './teaser-panel.scss';
-
-export class TeaserComponent extends HTMLElement {
+export class TeaserCardComponent extends HTMLElement {
     constructor() {
         super();
         this.init();
@@ -12,7 +10,7 @@ export class TeaserComponent extends HTMLElement {
         this.attachShadow({ mode: 'open' });
 
         const wrapper = document.createElement('div');
-        wrapper.classList.add('teaser-wrapper');
+        wrapper.classList.add('teaser-card-wrapper', 'with-border');
 
         if (!this.shadowRoot) {
             return;
@@ -22,4 +20,4 @@ export class TeaserComponent extends HTMLElement {
     }
 }
 
-customElements.define('teaser', TeaserComponent);
+customElements.define('teaser-card', TeaserCardComponent);
